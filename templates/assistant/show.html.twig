@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Dawini
+{% endblock %}
+
+{%block content%}
+<div class="page-wrapper" style="width: 919px;">
+	<div class="content container-fluid pb-0">
+		<div class="card">
+			<div class="col-md-12 col-12">
+				<nav aria-label="breadcrumb" class="page-breadcrumb">
+					<ol class="breadcrumb"></ol>
+				</nav>
+			</div>
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row" style="justify-content: center;">
+						<div class="page-header">
+							<div class="row align-items-center">
+								<div class="col-md-12 d-flex justify-content-end">
+									<div class="text-right">
+										<a class="btn btn-primary btn-add" style="width:190px" href="{{ path('app_assistant_index') }}">
+											<i class="icon-reply "></i>
+											Liste des Assistants
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><br>
+					<div class="card">
+						<div class="card-body">
+							<table class="table ">
+
+								 <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+           
+            
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Cin</th>
+                <td>{{ user.cin }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ user.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ user.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Gouvernorat</th>
+                <td>{{ user.gouvernorat }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ user.adresse }}</td>
+            </tr>
+           
+           
+        </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{%endblock%}
+
+
+

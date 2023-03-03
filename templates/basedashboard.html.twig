@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from doccure.dreamguystech.com/html/template/doctor-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 08 Feb 2023 11:39:00 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Dashboard
+{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+    <link href="{{asset('admin/assets/img/logo_small.png')}}" rel="icon">
+
+    <link rel="stylesheet" href="{{asset('doctor/assets/css/bootstrap.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('doctor/assets/plugins/fontawesome/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('doctor/assets/plugins/fontawesome/css/all.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('doctor/assets/css/feather.css')}}">
+
+    <link rel="stylesheet" href="{{asset('doctor/assets/plugins/select2/css/select2.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('doctor/assets/css/owl.carousel.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('doctor/assets/plugins/apex/apexcharts.css')}}">
+
+    <link rel="stylesheet" href="{{asset('doctor/assets/css/style.css')}}">
+    
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+
+        <header class="header">
+            <nav class="navbar navbar-expand-lg header-nav">
+                <div class="navbar-header">
+                    <a id="mobile_btn" href="javascript:void(0);">
+                        <span class="bar-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </a>
+                    <a href="index.html" class="navbar-brand logo">
+                        <img src="{{asset('admin/assets/img/logo.jpg')}}" class="img-fluid" alt="Logo">
+                    </a>
+                </div>
+                <div class="main-menu-wrapper">
+                    <div class="menu-header">
+                        <a href="index.html" class="menu-logo">
+                            <img src="{{asset('doctor/assets/img/logo.png')}}" class="img-fluid" alt="Logo">
+                        </a>
+                        <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                  
+                </div>
+                <ul class="nav header-navbar-rht">
+                    <li class="nav-item contact-item">
+                        <div class="header-contact-img">
+                            <i class="far fa-hospital"></i>
+                        </div>
+                        <div class="header-contact-detail">
+                            <p class="contact-header">Contact</p>
+                            <p class="contact-info-header"> {{app.user.telephone}}</p>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown has-arrow logged-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                            
+                                    <img  class="rounded-circle" src="{{ asset('/uploads/'~app.user.image) }}" alt="" width="40" height="40" /> 
+                        </a>
+                        
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <div class="user-header">
+                                <div class="avatar avatar-sm">
+                                     <img class="rounded-circle" src="{{ asset('/uploads/'~app.user.image) }}" alt="" width="31"  /> 
+                                </div>
+                                <div class="user-text">
+                                    <h6>{{app.user.nom}}</h6>
+                                    <p class="text-muted mb-0">{{app.user.prenom}}</p>
+                                </div>
+                            </div>
+                            {% if app.user.roles ==["ROLE_PATIENT"]%}
+                            <a class="dropdown-item" href="{{ path('app_dashpat') }}">Dashboard</a>
+                      
+                            <a class="dropdown-item" href="{{ path('app_patient_profile') }}">Profile Settings</a>
+                              <a class="dropdown-item" href="{{ path('app_patient_change-password') }}"><i class="feather-sliders me-1"></i>
+                            Modifier Mot de Passe </a>
+                        <hr class="my-0 ms-2 me-2">
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                            {% endif %}
+
+                             {% if app.user.roles ==["ROLE_MEDECIN"]%}
+                            <a class="dropdown-item" href="{{ path('app_dash') }}">Dashboard</a>
+                      
+                            <a class="dropdown-item" href="{{ path('app_medecin_profile') }}">Profile Settings</a>
+                              <a class="dropdown-item" href="{{ path('app_medecin_change-password') }}"><i class="feather-sliders me-1"></i>
+                            Modifier Mot de Passe </a>
+                        <hr class="my-0 ms-2 me-2">
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                            {% endif %}
+                             {% if app.user.roles ==["ROLE_ASSISTANT"]%}
+                            <a class="dropdown-item" href="{{ path('app_dashAss') }}">Dashboard</a>
+                            
+                      
+                            <a class="dropdown-item" href="{{ path('app_assistant_profile') }}">Profile Settings</a>
+                                <a class="dropdown-item" href="{{ path('app_assistant_change-password') }}"><i class="feather-sliders me-1"></i>
+                            Modifier Mot de Passe </a>
+                        <hr class="my-0 ms-2 me-2">
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                            {% endif %}
+                        </div>
+                    </li>
+
+                </ul>
+            </nav>
+        </header>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+
+                        <div class="profile-sidebar">
+                            <div class="widget-profile pro-widget-content">
+                                <div class="profile-info-widget">
+                                    <a href="#" class="booking-doc-img">
+                                       											 <img src="{{ asset('/uploads/'~app.user.image) }}" alt="" width="40" height="40" /> 
+
+                                    </a>
+                                    <div class="profile-det-info">
+                                        <h3>{{app.user.nom}} {{app.user.prenom}}</h3>
+                                        <div class="patient-details">
+                                            <h5 class="mb-0">BDS, MDS - Oral & Maxillofacial Surgery</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-widget">
+                                <nav class="dashboard-menu">
+                                    <ul>
+                                    {% if app.user.roles ==["ROLE_ASSISTANT"]%}
+                                        <li class="active">
+                                            <a href="{{ path('app_dashAss') }}">
+                                                <i class="fas fa-columns"></i>
+                                                <span>Dashboard</span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                        {% if app.user.roles ==["ROLE_MEDECIN"]%}
+                                        <li class="active">
+                                            <a href="{{ path('app_dash') }}">
+                                                <i class="fas fa-columns"></i>
+                                                <span>Dashboard</span>
+                                            </a>
+                                        </li>
+                                          <li>
+                                            <a href="my-patients.html">
+                                                <i class="fas fa-user-injured"></i>
+                                                <span>My Patients</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('medecin_assistant_index') }}">
+                                            
+                                                <i class="fas fa-user-nurse"></i>
+                                                <span>Assistant</span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+
+                                          {% if app.user.roles ==["ROLE_PATIENT"]%}
+                                        <li class="active">
+                                            <a href="{{ path('app_dashpat') }}">
+                                                <i class="fas fa-columns"></i>
+                                                <span>Dashboard</span>
+                                            </a>
+                                        </li>
+                                          <li>
+                                            <a href="my-patients.html">
+                                                <i class="fas fa-user-md"></i>
+                                                <span>My Medecins</span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                        <li>
+                                            <a href="appointments.html">
+                                                <i class="fas fa-calendar-check"></i>
+                                                <span>Appointments</span>
+                                            </a>
+                                        </li>
+                                      
+                                       
+                                        <li>
+                                            <a href="available-timings.html">
+                                                <i class="fas fa-clock"></i>
+                                                <span>Available Timings</span>
+                                            </a>
+                                        </li>
+                                       
+                                        
+                                        <li>
+                                            <a href="reviews.html">
+                                                <i class="fas fa-star"></i>
+                                                <span>Reviews</span>
+                                            </a>
+                                        </li>
+                                       
+                                       
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                     {% block content %}
+                      {% endblock %}
+                </div>
+            </div>
+        </div>
+
+
+       
+
+    </div>
+
+
+    <script data-cfasync="false"
+        src="https://doccure.dreamguystech.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="{{asset('doctor/assets/js/jquery-3.6.0.min.js')}}"></script>
+
+    <script src="{{asset('doctor/assets/js/bootstrap.bundle.min.js')}}"></script>
+
+    <script src="{{asset('doctor/assets/plugins/theia-sticky-sidebar/ResizeSensor.js')}}"></script>
+    <script src="{{asset('doctor/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')}}"></script>
+
+    <script src="{{asset('doctor/assets/js/circle-progress.min.js')}}"></script>
+
+    <script src="{{asset('doctor/assets/js/feather.min.js')}}"></script>
+
+    <script src="{{asset('doctor/assets/plugins/select2/js/select2.min.js')}}"></script>
+
+    <script src="{{asset('doctor/assets/js/owl.carousel.min.js')}}"></script>
+
+    <script src="{{asset('doctor/assets/plugins/apex/apexcharts.min.js')}}"></script>
+
+    <script src="{{asset('doctor/assets/plugins/apex/chart-data.js')}}"></script>
+
+    <script src="{{asset('doctor/assets/js/script.js')}}"></script>
+</body>
+
+<!-- Mirrored from doccure.dreamguystech.com/html/template/doctor-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 08 Feb 2023 11:39:21 GMT -->
+
+</html>

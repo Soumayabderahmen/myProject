@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Medecins
+{% endblock %}
+
+{% block content %}
+	<div class="page-wrapper">
+		<div class="content container-fluid pb-0">
+			<h4 class="mb-3">Medecins</h4>
+			<div class="row">
+				<div class="page-header">
+					<div class="row align-items-center">
+						<div class="col-md-12 d-flex justify-content-end">
+							<div class="text-right">
+								<a class="btn btn-primary btn-add" style="width:190px" href="{{ path('app_medecin_new') }}">
+									<i class="feather-plus-square me-1"></i>
+									Ajouter Medecins
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<table class="table datatable-basic table " id="datatable">
+						<div class="card-body">
+	
+
+							<div class="header-elements">
+								<thead class="thead-light">
+									<th>Nom Prenom</th>
+									
+									<th>Telephone</th>
+									<th>Gouvernorat</th>
+									
+									
+									
+									<th>Images</th>
+									<th>Tarif</th>
+									
+									<th colspan="3">
+										<center>Actions</center>
+									</th>
+								</thead>
+								<tbody>
+
+									{% for medecin in medecins %}
+										<tr>
+
+											<td>{{ medecin.nom }} {{ medecin.prenom }}</td>
+											
+											<td>{{ medecin.telephone }}</td>
+											<td>{{ medecin.gouvernorat }}</td>
+											
+											
+											
+											
+											   
+                       
+                   
+											<td>
+											 <img src="{{ asset('/uploads/'~medecin.image) }}" alt="" width="40" height="40" /> 
+											</td>
+	                                       {# <td colspan="2">
+												<h2 class="table-avatar">
+													<a href="#" class="spl-img">
+														<img <center> {% for image in medecin.image|slice(0, 1) %} <img src="{{ asset('/uploads/'~image.name) }}" alt="" width="40" height="40" /> {% endfor %} </center>
+															<a href="#">
+																
+															</a>
+														</h2>
+											</td> #}
+											<td>{{ medecin.tarif }}</td>
+											
+									 
+  			
+                        
+                        
+                        
+                       
+                        
+											<td style="display: inline-flex;margin-left: 150px;">
+                                              
+												<a href="{{ path('app_medecin_show', {'id': medecin.id}) }}" class="btn btn-sm bg-primary-light">
+													<i class="far fa-eye"></i>
+
+												</a>
+												&nbsp;
+												<a href="{{ path('app_medecin_edit', {'id': medecin.id}) }}" class="btn btn-sm bg-info-light">
+													<i class="far fa-edit"></i>
+
+												</a>
+												&nbsp;
+												{{ include('medecin/_delete_form.html.twig') }}
+
+											
+											</td>
+										
+
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="20">no records found</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+{# // 			<script>
+// $(document).ready(function() {
+//     $('#search-input').on('keyup', function() {
+//         $('#users-table').DataTable().search($(this).val()).draw();
+//     });
+// });
+// </script> #}
+
+
+		{% endblock %}
